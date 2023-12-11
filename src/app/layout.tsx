@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import "./globals.css";
-import Head from "./head";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 export default function RootLayout({
@@ -10,11 +9,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head />
       <body suppressHydrationWarning={true}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange>
           <Header />
