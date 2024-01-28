@@ -11,6 +11,7 @@ import {
   ListVideo,
   GanttChartSquare,
   Newspaper,
+  User,
 } from "lucide-react";
 import {
   Sheet,
@@ -51,6 +52,11 @@ export default function Header() {
       href: "/blog",
       label: "Blog",
       Icon: Newspaper,
+    },
+    {
+      href: "/profile",
+      label: "Profile",
+      Icon: User,
     },
   ];
 
