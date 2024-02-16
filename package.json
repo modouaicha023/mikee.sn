@@ -1,5 +1,5 @@
 {
-  "name": "arise-leveling",
+  "name": "galsen-mangas",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -20,6 +20,7 @@
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-resizable-panels": "^2.0.3",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7"
   },
