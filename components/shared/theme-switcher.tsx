@@ -1,10 +1,13 @@
 import { themes } from "@/utils/themes";
+import { useTheme } from "next-themes";
 
 export default function ThemeSwitcher() {
+  const { theme, setTheme } = useTheme();
+
   return (
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn m-1">
-        Theme
+        Theme 🎨
         <svg
           width="12px"
           height="12px"
@@ -16,16 +19,20 @@ export default function ThemeSwitcher() {
         </svg>
       </div>
       <ul className="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-52 max-h-96 overflow-y-auto">
-        {themes.map((theme) => (
-          <li key={theme}>
+        {themes.map((themeOption) => (
+          <li key={themeOption}>
             <input
               type="radio"
               name="theme-dropdown"
               className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-              aria-label={theme.charAt(0).toUpperCase() + theme.slice(1)}
-              value={theme}
+              aria-label={
+                themeOption.charAt(0).toUpperCase() + themeOption.slice(1)
+              }
+              value={themeOption}
+              checked={theme === themeOption} // Ensure the radio button is checked for the current theme
+              onChange={() => setTheme(themeOption)} // Set the selected theme
             />
-            {/* <label>{theme.charAt(0).toUpperCase() + theme.slice(1)}</label> */}
+            {/* <label>{themeOption.charAt(0).toUpperCase() + themeOption.slice(1)}</label> */}
           </li>
         ))}
       </ul>

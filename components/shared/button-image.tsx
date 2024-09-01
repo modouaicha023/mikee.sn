@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ReactNode } from "react";
 
 interface ButtonImageProps {
@@ -12,10 +13,10 @@ export const ButtonImage: React.FC<ButtonImageProps> = ({
   svg,
 }) => {
   return (
-    <button className="btn-outline btn">
+    <Link href={"#"} className="btn btn-outline text-xl">
       {svg && iconPosition === "left" && <span>{svg}</span>}
       {title}
       {svg && iconPosition === "right" && <span>{svg}</span>}
-    </button>
+    </Link>
   );
 };

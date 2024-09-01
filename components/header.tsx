@@ -4,8 +4,10 @@ interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = ({}) => {
   return (
-    <header className="prose">
-      <h1 className="my-2 text-center">Welcome⛩️</h1>
+    <header className="flex flex-col ">
+      <div className="prose max-w-none w-full">
+        <h1 className="text-center">Welcome⛩️</h1>
+      </div>
       <Navbar />
     </header>
   );

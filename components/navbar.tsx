@@ -7,20 +7,19 @@ import babyDragon from "@/public/images/baby-dragon.png";
 interface NavbarProps {}
 
 export const Navbar: React.FC<NavbarProps> = ({}) => {
-
   return (
-    <nav className="navbar flex justify-between items-center">
-      <div className="navbar-start w-fit">
-        <Image
-          src={babyDragon}
-          alt="Baby Dragon"
-          width={32}
-          height={32}
-          className="w-8 h-8 object-cover"
-        />
-      </div>
-      <ul className="flex gap-x-4 items-center navbar-center w-fit">
-        <li className="list-none">
+    <>
+      <nav className="navbar">
+        <div className="navbar-start">
+          <Image
+            src={babyDragon}
+            alt="Baby Dragon"
+            width={32}
+            height={32}
+            className="w-8 h-8 object-cover"
+          />
+        </div>
+        <ul className="navbar-center gap-x-2">
           <ButtonImage
             title="Popular"
             iconPosition="right"
@@ -79,11 +78,7 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
               </svg>
             }
           />
-        </li>
-        <li className="list-none">
           <SearchInput />
-        </li>
-        <li className="list-none">
           <ButtonImage
             title="New"
             iconPosition="right"
@@ -200,8 +195,6 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
               </svg>
             }
           />
-        </li>
-        <li className="list-none">
           <ButtonImage
             title="Catalogue"
             iconPosition="right"
@@ -386,11 +379,11 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
               </svg>
             }
           />
-        </li>
-      </ul>
-      <div className="navbar-end w-fit">
-        <ThemeSwitcher />
-      </div>
-    </nav>
+        </ul>
+        <div className="navbar-end">
+          <ThemeSwitcher />
+        </div>
+      </nav>
+    </>
   );
 };
