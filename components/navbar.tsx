@@ -13,7 +13,7 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
   const user = { username: "modouaicha023", avatar: dragon.src };
   return (
     <>
-      <nav className="navbar gap-4">
+      <nav className="navbar justify-between screen430:justify-normal gap-4">
         <div className="navbar-start">
           <Image
             src={babyDragon}
