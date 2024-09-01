@@ -1,3 +1,5 @@
+import  Image  from "next/Image";
+
 type User = {
   username: string;
   avatar: string;
@@ -12,7 +14,7 @@ export const User: React.FC<UserProps> = ({ user }) => {
       <div
         className="ring-primary ring-offset-base-100 w-12 rounded-full ring ring-offset-0"
       >
-        <img src={user.avatar} alt={user.username + "- Galsen Mangas"} />
+        <Image src={user.avatar} width={48} height={48} alt={user.username + "- Galsen Mangas"} />
       </div>
       <span className="text-xs pl-1 font-bold hidden screen580:block ">@{user.username}</span>
     </div>
