@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider themes={themes} enableSystem disableTransitionOnChange >
           <Header />
-          <main className="min-h-screen">{children}</main>
+          <main className="container min-h-screen flex">{children}</main>
         </ThemeProvider>
       </body>
     </html>
