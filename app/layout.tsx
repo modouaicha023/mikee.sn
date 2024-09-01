@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider themes={themes} enableSystem disableTransitionOnChange >
+        <ThemeProvider themes={themes} enableSystem disableTransitionOnChange>
           <Header />
           <main className="container min-h-screen flex">{children}</main>
         </ThemeProvider>

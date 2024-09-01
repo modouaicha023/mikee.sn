@@ -2,7 +2,7 @@ interface SearchInputProps {}
 
 export const SearchInput: React.FC<SearchInputProps> = ({}) => {
   return (
-    <label className="input input-bordered hidden screen430:flex items-center gap-2" >
+    <label className="input input-bordered hidden screen430:flex items-center gap-2">
       <input
         type="text"
         className="screen670:w-full screen810:w-80"

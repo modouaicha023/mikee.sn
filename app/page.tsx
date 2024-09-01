@@ -1,4 +1,4 @@
-import { MangaCard, Manga } from "@/components/shared/manga-card"
+import { MangaCard, Manga } from "@/components/shared/manga-card";
 
 const mangas: Manga[] = [
   {
@@ -66,8 +66,8 @@ export default function Home() {
   return (
     <>
       <section className="flex gap-6 p-4 flex-wrap">
-        { mangas.map((manga, index) => (
-        <MangaCard key={index} manga={manga}/>
+        {mangas.map((manga, index) => (
+          <MangaCard key={index} manga={manga} />
         ))}
       </section>
     </>
