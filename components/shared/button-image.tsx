@@ -13,10 +13,13 @@ export const ButtonImage: React.FC<ButtonImageProps> = ({
   svg,
 }) => {
   return (
-    <Link href={"#"} className="btn btn-outline text-xl">
-      {svg && iconPosition === "left" && <span>{svg}</span>}
-      {title}
-      {svg && iconPosition === "right" && <span>{svg}</span>}
+    <Link
+      href={"/mgg"}
+      className="btn btn-outline text-xs hidden screen1150:flex items-center justify-center whitespace-nowrap"
+    >
+      {svg && iconPosition === "left" && <span className="">{svg}</span>}
+      <span>{title}</span>
+      {svg && iconPosition === "right" && <span className="">{svg}</span>}
     </Link>
   );
 };

@@ -6,7 +6,12 @@ export default function ThemeSwitcher() {
 
   return (
     <div className="dropdown">
-      <div tabIndex={0} role="button" className="btn m-1">
+      <div
+        tabIndex={0}
+        role="button"
+        // className="btn text-xs m-1 whitespace-nowrap"
+        className="btn btn-outline text-xs flex items-center justify-center whitespace-nowrap flex-nowrap"
+      >
         Theme 🎨
         <svg
           width="12px"

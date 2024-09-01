@@ -1,5 +1,4 @@
 import { Navbar } from "@/components/navbar";
-
 interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = ({}) => {

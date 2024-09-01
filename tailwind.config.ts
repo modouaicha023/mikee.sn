@@ -6,11 +6,20 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  plugins: [require("@tailwindcss/typography"), require('daisyui')],
+  theme: {
+    extend: {
+      screens: {
+        "screen1150": "1150px",
+        "screen810": "810px",
+        "screen670": "670px",
+        "screen580": "580px",
+        "screen500": "500px",
+      },
+    },
+  },
+  plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
     themes: true,
-
-  }
-
+  },
 };
 export default config;

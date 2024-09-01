@@ -1,22 +1,26 @@
 "use client";
+import Image from "next/image";
 import { ButtonImage } from "@/components/shared/button-image";
 import { SearchInput } from "@/components/shared/search-input";
 import ThemeSwitcher from "@/components/shared/theme-switcher";
-import Image from "next/image";
+import { User } from "@/components/shared/user";
 import babyDragon from "@/public/images/baby-dragon.png";
+import dragon from "@/public/images/dragon-head.png";
+
 interface NavbarProps {}
 
 export const Navbar: React.FC<NavbarProps> = ({}) => {
+  const user = { username: "modouaicha023", avatar: dragon.src };
   return (
     <>
-      <nav className="navbar">
+      <nav className="navbar gap-4">
         <div className="navbar-start">
           <Image
             src={babyDragon}
             alt="Baby Dragon"
-            width={32}
-            height={32}
-            className="w-8 h-8 object-cover"
+            width={48}
+            height={48}
+            className="w-12 h-12 object-cover"
           />
         </div>
         <ul className="navbar-center gap-x-2">
@@ -380,8 +384,9 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
             }
           />
         </ul>
-        <div className="navbar-end">
+        <div className="navbar-end gap-x-2 w-fit">
           <ThemeSwitcher />
+          <User user={user} />
         </div>
       </nav>
     </>
