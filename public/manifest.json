@@ -1,0 +1,27 @@
+{
+    "name": "Galsen Mangas",
+    "short_name": "mangas",
+    "theme_color": "#343434",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "orientation": "natural",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "/baby-dragon-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/baby-dragon-256.png",
+            "type": "image/png",
+            "sizes": "256x256"
+        },
+        {
+            "src": "/baby-dragon-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}

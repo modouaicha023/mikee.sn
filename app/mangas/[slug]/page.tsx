@@ -16,7 +16,9 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
           src={soloLeveling.src}
           alt={manga.name}
           layout="responsive"
-          className="object-fill"
+          className="object-fill w-full"
+          width={100}
+          height={100}
         />
       </figure>
       <div className="card-body">

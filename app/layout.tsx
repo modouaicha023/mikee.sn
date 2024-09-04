@@ -15,6 +15,22 @@ export const metadata: Metadata = {
   title: "Galsen Mangas",
   description:
     "Senegalese platform for watching and reading animes, mangas and novels.",
+  manifest: "/manifest.json",
+  keywords: [
+    "mangas",
+    "comics",
+    "galsen",
+    "anime",
+    "galsen mangas",
+    "otaku",
+    "galsen otaku",
+  ],
+  authors: [
+    {
+      name: "Modou Aicha Diop",
+      url: "https://www.linkedin.com/in/modouaicha023/",
+    },
+  ],
 };
 
 export default function RootLayout({
