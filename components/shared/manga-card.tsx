@@ -1,11 +1,10 @@
-import soloLeveling from "@/public/images/solo-leveling.png";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 export interface Manga {
   slug: string;
-  coverImage: string;
+  coverImage: StaticImageData | string;
   name: string;
-  chapters: string; // to be updated after
+  chapters: string;
   status: "Ongoing" | "Upcomming" | "Finished" | "Paused"; // to be updated
   description: string;
   year: number;
@@ -19,23 +18,27 @@ export const MangaCard: React.FC<MangaCardProps> = ({ manga }) => {
   return (
     <Link
       href={"/mangas/" + manga.slug}
-      className="card border-2 border-base-content bg-base-100 w-60 h-80"
+      className="card border-2 border-base-content bg-base-100 w-[250px] h-[400px]"
     >
-      <figure>
+      <figure className="w-full">
         <Image
-          src={soloLeveling.src}
+          src={
+            typeof manga.coverImage === "object"
+              ? manga.coverImage.src
+              : manga.coverImage
+          }
           alt={manga.name}
-          width={soloLeveling.width}
-          height={soloLeveling.height}
-          className="object-fill"
+          height={200}
+          width={200}
+          className="w-full h-full object-fill"
         />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{manga.name}</h2>
         <div className="card-actions justify-end">
           <div className="badge badge-secondary">{manga.status}</div>
-          <div className="badge badge-outline">{manga.status}</div>
           <div className="badge badge-outline">{manga.chapters}</div>
+          <div className="badge badge-outline">{manga.year}</div>
         </div>
       </div>
     </Link>
