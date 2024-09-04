@@ -6,6 +6,7 @@ import ThemeSwitcher from "@/components/shared/theme-switcher";
 import { User } from "@/components/shared/user";
 import babyDragon from "@/public/images/baby-dragon.png";
 import dragon from "@/public/images/dragon-head.png";
+import Link from "next/link";
 
 interface NavbarProps {}
 
@@ -15,13 +16,15 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
     <>
       <nav className="navbar justify-between screen430:justify-normal gap-4">
         <div className="navbar-start">
-          <Image
-            src={babyDragon}
-            alt="Baby Dragon"
-            width={48}
-            height={48}
-            className="w-12 h-12 object-cover"
-          />
+          <Link href={"/"} >
+            <Image
+              src={babyDragon}
+              alt="Baby Dragon"
+              width={48}
+              height={48}
+              className="w-12 h-12 object-cover"
+            />
+          </Link>
         </div>
         <ul className="navbar-center gap-x-2">
           <ButtonImage

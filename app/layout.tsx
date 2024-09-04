@@ -4,6 +4,8 @@ import "./globals.css";
 import { Header } from "./../components/header";
 import { ThemeProvider } from "next-themes";
 import { themes } from "@/utils/themes";
+import { Analytics } from "@vercel/analytics/react";
+
 const inter = Coming_Soon({
   weight: "400",
   subsets: ["latin"],
@@ -21,12 +23,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body className={inter.className}>
         <ThemeProvider themes={themes} enableSystem disableTransitionOnChange>
           <Header />
-          <main className="container min-h-screen flex">{children}</main>
+          <main className="w-full min-h-screen flex">{children}</main>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

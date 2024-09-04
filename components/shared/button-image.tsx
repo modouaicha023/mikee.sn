@@ -14,7 +14,7 @@ export const ButtonImage: React.FC<ButtonImageProps> = ({
 }) => {
   return (
     <Link
-      href={"/mgg"}
+      href={"#"}
       className="btn btn-outline text-xs hidden screen1150:flex items-center justify-center whitespace-nowrap"
     >
       {svg && iconPosition === "left" && <span className="">{svg}</span>}
