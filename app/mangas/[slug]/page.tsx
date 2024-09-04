@@ -22,7 +22,7 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
       <div className="prose card-body">
         <h2 className="card-title">{manga.name}</h2>
         <div className="card-actions justify-end">
-          <spa className="badge badge-secondary">{manga.status}</span>
+          <span className="badge badge-secondary">{manga.status}</span>
           <span className="badge badge-outline">
             Last chapter : {manga.chapters}
           </span>
