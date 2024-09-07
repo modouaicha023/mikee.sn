@@ -17,6 +17,8 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
               : manga.coverImage
           }
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          quality={100}
           alt={manga.name}
           className="object-contain aspect-auto rounded-md"
         />

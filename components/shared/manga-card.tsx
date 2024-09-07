@@ -45,6 +45,8 @@ export const MangaCard: React.FC<MangaCardProps> = ({ manga }) => {
           }
           alt={manga.name}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          quality={100}
           className="object-fill aspect-auto"
         />
       </figure>
@@ -52,7 +54,9 @@ export const MangaCard: React.FC<MangaCardProps> = ({ manga }) => {
         <h2 className="text-center">{manga.name}</h2>
         <div className="flex flex-wrap gap-1  justify-evenly">
           <div className={`badge  ${statusColor}`}>{manga.status}</div>
-          <div className="badge badge-outline whitespace-nowrap">{manga.chapters}</div>
+          <div className="badge badge-outline whitespace-nowrap">
+            {manga.chapters}
+          </div>
           <div className="badge badge-outline">{manga.year}</div>
         </div>
       </div>

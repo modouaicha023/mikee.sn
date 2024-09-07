@@ -39,9 +39,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+    <html lang="en" suppressHydrationWarning={true} data-theme="light">
       <body className={inter.className}>
-        <ThemeProvider themes={themes} enableSystem disableTransitionOnChange>
+        <ThemeProvider themes={themes} disableTransitionOnChange>
           <Header />
           <main className="w-full min-h-screen flex">{children}</main>
         </ThemeProvider>
