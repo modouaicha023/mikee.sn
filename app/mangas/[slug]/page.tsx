@@ -8,29 +8,33 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
     notFound();
   }
   return (
-    <div className=" max-w-none w-full flex gap">
-      <figure className="w-[400px] h-[500px]">
+    <article className="flex justify-center max-w-none w-full p-4 gap-2 flex-col md:flex-row h-fit">
+      <figure className="flex relative h-[300px] md:h-[500px] md:w-[300px] w-full ">
         <Image
-          src={manga.coverImage}
+          src={
+            typeof manga.coverImage === "object"
+              ? manga.coverImage.src
+              : manga.coverImage
+          }
+          fill
           alt={manga.name}
-          layout="responsive"
-          className="object-fill "
-          width={200}
-          height={200}
+          className="object-contain aspect-auto rounded-md"
         />
       </figure>
-      <div className="prose card-body">
-        <h2 className="card-title">{manga.name}</h2>
-        <div className="card-actions justify-end">
+      <div className="prose max-w-none flex flex-col gap-4 md:pl-10 justify-center">
+        <h2 className="text-center">{manga.name}</h2>
+        <div className="flex flex-wrap justify-center gap-2 md:justify-end">
           <span className="badge badge-secondary">{manga.status}</span>
-          <span className="badge badge-outline">
+          <span className="badge badge-outline whitespace-nowrap">
             Last chapter : {manga.chapters}
           </span>
           <span className="badge badge-outline">{manga.year}</span>
-          <p className="card-title">{manga.description}</p>
         </div>
+        <p className="card-title w-full text-center md:max-w-sm md:text-justify">
+          {manga.description}
+        </p>
       </div>
-    </div>
+    </article>
   );
 };
 

@@ -1,11 +1,17 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
+export enum MangaStatus {
+  ONGOING = "Ongoing",
+  UPCOMMING = "Upcomming",
+  FINISHED = "Finished",
+  PAUSED = "Paused",
+}
 export interface Manga {
   slug: string;
   coverImage: StaticImageData | string;
   name: string;
   chapters: string;
-  status: "Ongoing" | "Upcomming" | "Finished" | "Paused"; // to be updated
+  status: MangaStatus;
   description: string;
   year: number;
 }
@@ -15,12 +21,22 @@ interface MangaCardProps {
 }
 
 export const MangaCard: React.FC<MangaCardProps> = ({ manga }) => {
+  let statusColor = "badge-secondary";
+  if (manga.status === MangaStatus.FINISHED) {
+    statusColor = "badge-secondary";
+  } else if (manga.status === MangaStatus.ONGOING) {
+    statusColor = "badge-primary";
+  } else if (manga.status === MangaStatus.PAUSED) {
+    statusColor = "badge-ghost";
+  } else if (manga.status === MangaStatus.UPCOMMING) {
+    statusColor = "badge-info";
+  }
   return (
     <Link
       href={"/mangas/" + manga.slug}
-      className="card border-2 border-base-content bg-base-100 w-[250px] h-[400px]"
+      className="flex flex-col border-2 border-base-content bg-base-100 w-[250px] h-[350px] sm:w-[200px] sm:h-[300px]"
     >
-      <figure className="w-full">
+      <figure className="h-60 relative flex-grow">
         <Image
           src={
             typeof manga.coverImage === "object"
@@ -28,16 +44,15 @@ export const MangaCard: React.FC<MangaCardProps> = ({ manga }) => {
               : manga.coverImage
           }
           alt={manga.name}
-          height={200}
-          width={200}
-          className="w-full h-full object-fill"
+          fill
+          className="object-fill aspect-auto"
         />
       </figure>
-      <div className="card-body">
-        <h2 className="card-title">{manga.name}</h2>
-        <div className="card-actions justify-end">
-          <div className="badge badge-secondary">{manga.status}</div>
-          <div className="badge badge-outline">{manga.chapters}</div>
+      <div className="flex flex-col p-4">
+        <h2 className="text-center">{manga.name}</h2>
+        <div className="flex flex-wrap gap-1  justify-evenly">
+          <div className={`badge  ${statusColor}`}>{manga.status}</div>
+          <div className="badge badge-outline whitespace-nowrap">{manga.chapters}</div>
           <div className="badge badge-outline">{manga.year}</div>
         </div>
       </div>

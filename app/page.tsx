@@ -4,8 +4,8 @@ import { mangas } from "@/utils/data";
 export default function HomePage() {
   return (
     <>
-      <section className="flex gap-4 p-4 flex-wrap justify-center sm:justify-normal">
-        {mangas.map((manga, index) => (
+      <section className="flex flex-wrap gap-2 px-6 py-2 justify-center sm:justify-normal h-fit mx-auto cente">
+        {mangas.map((manga: Manga, index: number) => (
           <MangaCard key={index} manga={manga} />
         ))}
       </section>
