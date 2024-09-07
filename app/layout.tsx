@@ -5,6 +5,7 @@ import { Header } from "./../components/header";
 import { ThemeProvider } from "next-themes";
 import { themes } from "@/utils/themes";
 import { Analytics } from "@vercel/analytics/react";
+import GoogleAnalytics from "@/components/google-analytics";
 
 const inter = Coming_Soon({
   weight: "400",
@@ -40,6 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true} data-theme="light">
+      <GoogleAnalytics />
       <body className={inter.className}>
         <ThemeProvider themes={themes} disableTransitionOnChange>
           <Header />
