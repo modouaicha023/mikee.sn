@@ -1,10 +1,11 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 export enum MangaStatus {
-  ONGOING = "Ongoing",
-  UPCOMMING = "Upcomming",
-  FINISHED = "Finished",
-  PAUSED = "Paused",
+  ONGOING = "ongoing",
+  UPCOMMING = "upcomming",
+  COMPLETED = "completed	",
+  PAUSED = "paused",
+  CANCELLED = "cancelled",
 }
 export interface Manga {
   slug: string;
@@ -13,7 +14,7 @@ export interface Manga {
   chapters: string;
   status: MangaStatus;
   description: string;
-  year: number;
+  year: string;
 }
 
 interface MangaCardProps {
@@ -21,8 +22,8 @@ interface MangaCardProps {
 }
 
 export const MangaCard: React.FC<MangaCardProps> = ({ manga }) => {
-  let statusColor = "badge-secondary";
-  if (manga.status === MangaStatus.FINISHED) {
+  let statusColor = "badge-accent";
+  if (manga.status === MangaStatus.COMPLETED) {
     statusColor = "badge-secondary";
   } else if (manga.status === MangaStatus.ONGOING) {
     statusColor = "badge-primary";
@@ -30,6 +31,8 @@ export const MangaCard: React.FC<MangaCardProps> = ({ manga }) => {
     statusColor = "badge-ghost";
   } else if (manga.status === MangaStatus.UPCOMMING) {
     statusColor = "badge-info";
+  } else if (manga.status === MangaStatus.CANCELLED) {
+    statusColor = "badge-warning";
   }
   return (
     <Link
