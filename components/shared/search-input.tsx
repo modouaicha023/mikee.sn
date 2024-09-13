@@ -5,17 +5,17 @@ import { useEffect, useState } from "react";
 interface SearchInputProps {}
 
 export const SearchInput: React.FC<SearchInputProps> = ({}) => {
-  // const [openSearch, setOpenSearch] = useState(false);
-  // const keyDownHandler = (event: KeyboardEvent) => {
-  //   if (event.ctrlKey && (event.key === "k" || event.key === "K")) {
-  //     event.preventDefault();
-  //     setOpenSearch(true);
-  //   }
-  // };
+  const [openSearch, setOpenSearch] = useState(false);
+  const keyDownHandler = (event: KeyboardEvent) => {
+    if (event.ctrlKey && (event.key === "k" || event.key === "K")) {
+      event.preventDefault();
+      setOpenSearch(true);
+    }
+  };
 
-  // useEffect(() => {
-  //   window.addEventListener("keydown", keyDownHandler);
-  // }, []);
+  useEffect(() => {
+    window.addEventListener("keydown", keyDownHandler);
+  }, []);
   // console.log(openSearch);
   return (
     <>

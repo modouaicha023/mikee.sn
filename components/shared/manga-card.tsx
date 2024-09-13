@@ -1,21 +1,6 @@
-import Image, { StaticImageData } from "next/image";
+import { Manga, MangaStatus } from "@/@types";
+import Image from "next/image";
 import Link from "next/link";
-export enum MangaStatus {
-  ONGOING = "ongoing",
-  UPCOMMING = "upcomming",
-  COMPLETED = "completed	",
-  PAUSED = "paused",
-  CANCELLED = "cancelled",
-}
-export interface Manga {
-  slug: string;
-  coverImage: StaticImageData | string;
-  name: string;
-  chapters: string;
-  status: MangaStatus;
-  description: string;
-  year: string;
-}
 
 interface MangaCardProps {
   manga: Manga;
@@ -48,19 +33,25 @@ export const MangaCard: React.FC<MangaCardProps> = ({ manga }) => {
           }
           alt={manga.name}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           quality={100}
           className="object-fill aspect-auto"
         />
       </figure>
       <div className="flex flex-col p-4">
-        <h2 className="text-center">{manga.name}</h2>
+        <h2 className="text-center text-ellipsis line-clamp-1">{manga.name}</h2>
         <div className="flex flex-wrap gap-1  justify-evenly">
-          <div className={`badge  ${statusColor}`}>{manga.status}</div>
-          <div className="badge badge-outline whitespace-nowrap">
-            {manga.chapters}
-          </div>
-          <div className="badge badge-outline">{manga.year}</div>
+          {manga.status && (
+            <div className={`badge  ${statusColor}`}>{manga.status}</div>
+          )}
+          {manga.lastChapter && (
+            <div className="badge badge-outline whitespace-nowrap">
+              {manga?.lastChapter}
+            </div>
+          )}
+          {manga.year && (
+            <div className="badge badge-outline">{manga.year}</div>
+          )}
         </div>
       </div>
     </Link>

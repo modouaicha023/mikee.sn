@@ -1,5 +1,6 @@
-import { MangaCard, Manga } from "@/components/shared/manga-card";
 import { MANGA } from "@consumet/extensions";
+import { Manga } from "@/@types";
+import { MangaCard } from "@/components/shared/manga-card";
 
 export default async function HomePage() {
   // Fetch manga data server-side
@@ -7,12 +8,12 @@ export default async function HomePage() {
   let mangas: Manga[] = [];
 
   try {
-    const data = await manga.fetchPopular();
+    const data = await manga.search("solo");
     mangas =
       data?.results?.map((manga: any) => ({
         coverImage: manga.image,
         name: manga.title,
-        chapters: manga.lastChapter || "0",
+        lastChapter: manga.lastChapter,
         status: manga.status,
         slug: manga.id,
         year: manga.releaseDate,
