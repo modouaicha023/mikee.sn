@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import { IMangaChapterPage, MANGA } from "@consumet/extensions";
-import { Manga } from "@/@types";
 import { ChapterCard } from "@/components/shared/chapter-card";
+import Link from "next/link";
 
 const ChapterPage = async ({
   params,
@@ -10,7 +9,11 @@ const ChapterPage = async ({
   params: { slug: string; chapter: string };
 }) => {
   const mangadex = new MANGA.MangaDex();
-  const mangaName = (await mangadex.fetchMangaInfo(params.slug)).title;
+  const mangaInfo = await mangadex.fetchMangaInfo(params.slug);
+  const mangaName = mangaInfo.title;
+  let chapterInfo = mangaInfo.chapters?.find(
+    (chapter) => chapter.id === params.chapter
+  );
 
   let chapterImages: IMangaChapterPage[] = [];
 
@@ -24,6 +27,17 @@ const ChapterPage = async ({
 
   return (
     <article className="flex items-center w-full p-4 flex-col h-fit">
+      <div className="breadcrumbs text-sm">
+        <ul>
+          <li>
+            <Link href={"/"}>Home</Link>
+          </li>
+          <li>
+            <Link href={`/mangas/${params.slug}`}>{mangaName as string}</Link>
+          </li>
+          <li>Chapter {chapterInfo?.chapterNumber as string}</li>
+        </ul>
+      </div>
       {chapterImages.map((chapterImage: { img: string; page: number }) => (
         <ChapterCard
           key={chapterImage.page}
@@ -31,19 +45,6 @@ const ChapterPage = async ({
           mangaName={mangaName as string}
         />
       ))}
-      {/* <div className="prose max-w-none flex flex-col gap-4 md:pl-10 justify-center">
-        <h2 className="text-center">{manga.name}</h2>
-        <div className="flex flex-wrap justify-center gap-2 md:justify-end">
-          <span className="badge badge-secondary">{manga.status}</span>
-          <span className="badge badge-outline whitespace-nowrap">
-            Last chapter: {manga.chapters}
-          </span>
-          <span className="badge badge-outline">{manga.year}</span>
-        </div>
-        <p className=" w-full text-wrap text-center md:max-w-sm md:text-justify">
-          {manga.description}
-        </p>
-      </div> */}
     </article>
   );
 };

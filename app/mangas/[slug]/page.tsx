@@ -4,21 +4,6 @@ import { IMangaInfo, MANGA } from "@consumet/extensions";
 import { Manga } from "@/@types";
 import Link from "next/link";
 
-const getTitle = (
-  title: string | [lang: string][] | { [lang: string]: string }
-) => {
-  if (typeof title === "string") {
-    return title;
-  }
-  if (Array.isArray(title)) {
-    return title[0] || "Untitled";
-  }
-  if (typeof title === "object") {
-    return title.en || Object.values(title)[0] || "Untitled";
-  }
-  return "Untitled";
-};
-
 const MangaPage = async ({ params }: { params: { slug: string } }) => {
   const mangadex = new MANGA.MangaDex();
   let manga: Manga | null = null;
@@ -104,21 +89,24 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
           </div>
         </div>
       </div>
-      <ul className="flex  flex-wrap w-full  items-center justify-between gap-2 overflow-auto max-w-3xl">
-        {manga.chapters?.map((chapter) => (
-          <li key={chapter.id}>
-            <Link
-              href={`/mangas/${manga.slug}/chapter/${chapter.id}`}
-              className="flex gap-2 "
-            >
-              <button className="btn btn-primary">
-                {chapter.chapterNumber !== undefined && (
-                  <span> Chapter {chapter?.chapterNumber as any}</span>
-                )}{" "}
-              </button>
-            </Link>
-          </li>
-        ))}
+      <ul className="flex flex-wrap w-full  items-center gap-2 overflow-auto max-w-3xl">
+        {manga.chapters
+          ?.slice(-20) // Crée une copie du tableau pour ne pas muter l'original
+          .reverse() // Inverse l'ordre des éléments
+          .map((chapter) => (
+            <li key={chapter.id}>
+              <Link
+                href={`/mangas/${manga.slug}/chapter/${chapter.id}`}
+                className="flex gap-2 "
+              >
+                <button className="btn btn-primary">
+                  {chapter.chapterNumber !== undefined && (
+                    <span> Chapter {chapter.chapterNumber as string}</span>
+                  )}{" "}
+                </button>
+              </Link>
+            </li>
+          ))}
       </ul>
     </article>
   );
