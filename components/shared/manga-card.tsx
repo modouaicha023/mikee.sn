@@ -2,7 +2,7 @@ import { Manga, MangaStatus } from "@/@types";
 import Image from "next/image";
 import Link from "next/link";
 
-interface MangaCardProps {
+export interface MangaCardProps {
   manga: Manga;
 }
 

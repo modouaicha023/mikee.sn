@@ -85,14 +85,14 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
               >
                 <button className="btn btn-primary">
                   Chapter{" "}
-                  {manga.chapters[manga.chapters.length - 1]?.chapterNumber}
+                  {manga.chapters[manga.chapters.length - 1]?.chapterNumber as any}
                 </button>
               </Link>
             )}
             {manga.chapters && (
               <Link href={`/mangas/${manga.slug}/${manga.chapters[0].id}`}>
                 <button className="btn btn-primary">
-                  Chapter {manga.chapters[0].chapterNumber}
+                  Chapter {manga.chapters[0].chapterNumber as any}
                 </button>
               </Link>
             )}
@@ -107,7 +107,10 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
             className="flex gap-2"
           >
             <button className="btn btn-primary">
-              <h2>{chapter.title}</h2>: Chapter {chapter.chapterNumber}
+              {chapter.title && <h2>{chapter.title}</h2>}
+              {chapter.chapterNumber !== undefined && (
+                <span>: Chapter {chapter?.chapterNumber as any}</span>
+              )}{" "}
             </button>
           </Link>
         ))}

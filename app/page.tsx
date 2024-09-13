@@ -3,7 +3,6 @@ import { Manga } from "@/@types";
 import { MangaCard } from "@/components/shared/manga-card";
 
 export default async function HomePage() {
-  // Fetch manga data server-side
   const manga = new MANGA.MangaDex();
   let mangas: Manga[] = [];
 

@@ -1,6 +1,4 @@
-import Image from "next/image";
 import Link from "next/link";
-import zoro from "@/public/images/zoro_being_lost.jpg";
 
 export default function NotFound() {
   return (
