@@ -11,7 +11,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: '**.gogocdn.net',
+                hostname: 'gogocdn.net',
                 port: '',
                 pathname: '/**',
             },
@@ -23,7 +23,19 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
+                hostname: '**.mangadex.network',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
                 hostname: 'mangadex.network',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'cmdxd98sb0x3yprd.mangadex.network',
                 port: '',
                 pathname: '/**',
             },

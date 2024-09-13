@@ -1,7 +1,5 @@
-import { Manga, MangaStatus } from "@/@types";
 import { IMangaChapterPage } from "@consumet/extensions";
 import Image from "next/image";
-import Link from "next/link";
 
 interface MangaCardProps {
   chapter: IMangaChapterPage;
@@ -19,7 +17,7 @@ export const ChapterCard: React.FC<MangaCardProps> = ({
         width={600}
         height={600}
         quality={100}
-        alt={mangaName + "- Page " + chapter.page}
+        alt={mangaName + "- Page " + chapter.page + "Galsens Mangas Senegal"}
         className="object-contain aspect-auto w-full h-full"
       />
     </figure>

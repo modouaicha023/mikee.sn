@@ -46,8 +46,8 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
   }
 
   return (
-    <article className=" flex flex-col gap-4 items-center p-4">
-      <div className="flex justify-center max-w-none w-full p-4 gap-2 flex-col md:flex-row h-fit">
+    <article className=" flex flex-col gap-4 items-center w-full justify-center p-4">
+      <div className="flex justify-center items-center max-w-none w-full p-4 gap-2 flex-col md:flex-row h-fit">
         <figure className="flex relative h-[300px] md:h-[500px] md:w-[300px] w-full">
           <Image
             src={manga.coverImage}
@@ -79,18 +79,23 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
           <div className="flex gap-4">
             {manga.chapters && (
               <Link
-                href={`/mangas/${manga.slug}/${
+                href={`/mangas/${manga.slug}/chapter/${
                   manga.chapters[manga.chapters.length - 1].id
                 }`}
               >
                 <button className="btn btn-primary">
                   Chapter{" "}
-                  {manga.chapters[manga.chapters.length - 1]?.chapterNumber as any}
+                  {
+                    manga.chapters[manga.chapters.length - 1]
+                      ?.chapterNumber as any
+                  }
                 </button>
               </Link>
             )}
             {manga.chapters && (
-              <Link href={`/mangas/${manga.slug}/${manga.chapters[0].id}`}>
+              <Link
+                href={`/mangas/${manga.slug}/chapter/${manga.chapters[0].id}`}
+              >
                 <button className="btn btn-primary">
                   Chapter {manga.chapters[0].chapterNumber as any}
                 </button>
@@ -99,20 +104,20 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
           </div>
         </div>
       </div>
-      <ul className="flex flex-col gap-2 w-48 h-96 overflow-auto">
+      <ul className="flex  flex-wrap w-full  items-center justify-between gap-2 overflow-auto max-w-3xl">
         {manga.chapters?.map((chapter) => (
-          <Link
-            key={chapter.id}
-            href={`/mangas/${manga.slug}/${chapter.id}`}
-            className="flex gap-2"
-          >
-            <button className="btn btn-primary">
-              {chapter.title && <h2>{chapter.title}</h2>}
-              {chapter.chapterNumber !== undefined && (
-                <span>: Chapter {chapter?.chapterNumber as any}</span>
-              )}{" "}
-            </button>
-          </Link>
+          <li key={chapter.id}>
+            <Link
+              href={`/mangas/${manga.slug}/chapter/${chapter.id}`}
+              className="flex gap-2 "
+            >
+              <button className="btn btn-primary">
+                {chapter.chapterNumber !== undefined && (
+                  <span> Chapter {chapter?.chapterNumber as any}</span>
+                )}{" "}
+              </button>
+            </Link>
+          </li>
         ))}
       </ul>
     </article>
