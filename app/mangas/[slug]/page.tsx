@@ -10,7 +10,7 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
 
   try {
     const data: IMangaInfo = await mangadex.fetchMangaInfo(params.slug);
-    // console.log(data);
+    console.log(data);
     manga = {
       coverImage: data.image || "",
       name: data.title as any,
@@ -18,8 +18,15 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
       status: data.status || ("Unknown" as any),
       slug: data.id,
       year: (data.releaseDate || "").toString(),
-      description: "",
+      description:
+        typeof data.description === "string"
+          ? data.description
+          : Array.isArray(data.description)
+          ? data.description[0][0]
+          : data.description?.en || "", // Handle the object case, where 'en' is a property
+
       chapters: data.chapters,
+      genres: data.themes as string[],
     };
   } catch (error) {
     console.error("Error fetching manga data:", error);
@@ -44,24 +51,29 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
           />
         </figure>
         <div className="prose max-w-none flex flex-col gap-4 md:pl-10 justify-center">
-          <h2 className="text-center">{manga.name}</h2>
-          <div className="flex flex-wrap justify-center gap-2 md:justify-end">
+          <h1 className="text-center text-xl md:text-2xl m-0  md:text-start">
+            {manga.name}
+          </h1>
+          <div className="flex flex-wrap justify-center gap-2 md:justify-start">
             {manga.status && (
               <span className="badge badge-secondary">{manga.status}</span>
             )}
-            {manga.lastChapter && (
-              <span className="badge badge-outline whitespace-nowrap">
-                Last chapter: {manga.lastChapter}
-              </span>
-            )}
             {manga.year && (
-              <span className="badge badge-outline">{manga.year}</span>
+              <span className="badge badge-info">{manga.year}</span>
             )}
           </div>
-          <p className=" w-full text-wrap text-center md:max-w-sm md:text-justify">
+          <div className="flex gap-x-4 justify-center md:justify-start items-center h-fit">
+            <h2 className="h-fit m-0">Genre : </h2>
+            {manga.genres?.map((genre) => (
+              <span className="badge badge-outline" key={genre}>
+                {genre}
+              </span>
+            ))}
+          </div>
+          <p className=" w-full break-all md:max-w-md md:text-justify text-balance text-sm md:text-lg p-4 m-0">
             {manga.description}
           </p>
-          <div className="flex gap-4">
+          <div className="flex gap-4 justify-center items-center">
             {manga.chapters && (
               <Link
                 href={`/mangas/${manga.slug}/chapter/${
@@ -91,7 +103,7 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
       </div>
       <ul className="flex flex-wrap w-full  items-center gap-2 overflow-auto max-w-3xl">
         {manga.chapters
-          ?.slice(-20) // Crée une copie du tableau pour ne pas muter l'original
+          ?.slice() // Crée une copie du tableau pour ne pas muter l'original
           .reverse() // Inverse l'ordre des éléments
           .map((chapter) => (
             <li key={chapter.id}>

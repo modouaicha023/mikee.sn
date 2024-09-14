@@ -7,7 +7,7 @@ export default async function HomePage() {
   let mangas: Manga[] = [];
 
   try {
-    const data = await manga.search("martial");
+    const data = await manga.search("emperor");
     mangas =
       data?.results?.map((manga: any) => ({
         coverImage: manga.image,

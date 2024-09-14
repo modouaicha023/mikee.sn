@@ -19,7 +19,6 @@ const ChapterPage = async ({
 
   try {
     chapterImages = await mangadex.fetchChapterPages(params.chapter);
-    // console.log(chapterImages);
   } catch (error) {
     console.error("Error fetching manga data:", error);
     notFound();

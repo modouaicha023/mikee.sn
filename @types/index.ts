@@ -17,4 +17,5 @@ export interface Manga {
   status: MangaStatus;
   description: string;
   year: string;
+  genres?: string[];
 }
