@@ -12,23 +12,27 @@ export const ChapterCard: React.FC<ChapterCardProps> = ({
   chapter,
   mangaName,
 }) => {
-  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
+  const [aspectRatio, setAspectRatio] = useState(1);
+
+  const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = event.target as HTMLImageElement;
+    setAspectRatio(img.naturalWidth / img.naturalHeight);
+  };
 
   return (
-    <figure className="relative w-full md:max-w-[800px] h-auto">
-      <Image
-        src={chapter?.img}
-        width={imageSize.width}
-        height={imageSize.height}
-        quality={100}
-        priority
-        alt={`${mangaName} - Page ${chapter.page} Galsens Mangas Senegal`}
-        className="object-contain w-full h-auto"
-        onLoadingComplete={({ naturalWidth, naturalHeight }) =>
-          setImageSize({ width: naturalWidth, height: naturalHeight })
-        }
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 70vw"
-      />
+    <figure className="relative w-full md:max-w-[800px]">
+      <div style={{ paddingTop: `${100 / aspectRatio}%` }} className="relative">
+        <Image
+          src={chapter?.img}
+          fill
+          quality={100}
+          priority
+          alt={`${mangaName} - Page ${chapter.page} Galsens Mangas Senegal`}
+          className="object-contain"
+          onLoad={handleImageLoad}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 70vw"
+        />
+      </div>
     </figure>
   );
 };
