@@ -18,6 +18,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({}) => {
     } else {
       router.push("/");
     }
+    inputRef.current?.blur();
   };
 
   useEffect(() => {
@@ -56,7 +57,9 @@ export const SearchInput: React.FC<SearchInputProps> = ({}) => {
         className="input input-bordered flex items-center gap-2 btn"
         htmlFor="my_modal_7"
       >
-        <span className=" screen810:w-80 text-start hidden screen380:block">Search</span>
+        <span className=" screen810:w-80 text-start hidden screen380:block">
+          Search
+        </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5 screen670:hidden"
