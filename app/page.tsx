@@ -1,5 +1,4 @@
 "use client";
-import { MANGA } from "@consumet/extensions";
 import { Manga } from "@/@types";
 import { MangaCard } from "@/components/shared/manga-card";
 import { useEffect, useState } from "react";
@@ -11,29 +10,29 @@ export default function HomePage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchResults = async () => {
+    const fetchMangas = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(
-          `/api/mangas?page=${encodeURIComponent(mangaPage || "1")}`
-        );
+        const response = await fetch(`/api/mangas?page=${mangaPage}`);
         if (!response.ok) {
-          throw new Error("Failed to fetch search results");
+          throw new Error("Failed to fetch manga data");
         }
         const data = await response.json();
-        setMangas(data.results);
+        if (Array.isArray(data.mangas)) {
+          setMangas(data.mangas);
+        } else {
+          throw new Error("Invalid data format received from API");
+        }
       } catch (err) {
-        setError("An error occurred while fetching search results");
+        setError("An error occurred while fetching manga data");
         console.error(err);
       } finally {
         setLoading(false);
       }
     };
 
-    if (mangaPage) {
-      fetchResults();
-    }
+    fetchMangas();
   }, [mangaPage]);
 
   if (loading)
@@ -43,33 +42,32 @@ export default function HomePage() {
       </div>
     );
   if (error) return <div>Error: {error}</div>;
-  if (Array.isArray(mangas) && mangas.length <= 0)
-    return <div>No mangas found</div>;
-  console.log(mangas);
+  if (mangas.length === 0) return <div>No mangas found</div>;
+
   return (
     <>
       <div className="flex flex-col gap-y-4 items-center justify-center py-2">
         <section className="flex flex-wrap gap-2 px-6 py-2 justify-center sm:justify-normal h-fit mx-auto">
-          {Array.isArray(mangas) &&
-            mangas.map((manga) => <MangaCard key={manga.slug} manga={manga} />)}
+          {mangas.map((manga) => (
+            <MangaCard key={manga.slug} manga={manga} />
+          ))}
         </section>
-        {Array.isArray(mangas) && mangas.length > 0 && (
-          <div className="join">
-            <button
-              className="join-item btn"
-              onClick={() => setMangaPage(mangaPage - 1)}
-            >
-              «
-            </button>
-            <button className="join-item btn">Page {mangaPage}</button>
-            <button
-              className="join-item btn"
-              onClick={() => setMangaPage(mangaPage + 1)}
-            >
-              »
-            </button>
-          </div>
-        )}
+        <div className="join">
+          <button
+            className="join-item btn"
+            onClick={() => setMangaPage((prev) => Math.max(1, prev - 1))}
+            disabled={mangaPage === 1}
+          >
+            «
+          </button>
+          <button className="join-item btn btn-accent">Page {mangaPage}</button>
+          <button
+            className="join-item btn"
+            onClick={() => setMangaPage((prev) => prev + 1)}
+          >
+            »
+          </button>
+        </div>
       </div>
 
       <aside className="border-l-2 border-base-content w-1/5 min-w-[300px] max-w-[400px] hidden sm:flex">
