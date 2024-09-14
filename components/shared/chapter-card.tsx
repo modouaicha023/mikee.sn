@@ -1,24 +1,33 @@
+"use client";
 import { IMangaChapterPage } from "@consumet/extensions";
 import Image from "next/image";
+import { useState } from "react";
 
-interface MangaCardProps {
+interface ChapterCardProps {
   chapter: IMangaChapterPage;
   mangaName: string;
 }
 
-export const ChapterCard: React.FC<MangaCardProps> = ({
+export const ChapterCard: React.FC<ChapterCardProps> = ({
   chapter,
   mangaName,
 }) => {
+  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
+
   return (
-    <figure className="relative w-[70vw] h-fit">
+    <figure className="relative w-full md:max-w-[800px] h-auto">
       <Image
         src={chapter?.img}
-        width={600}
-        height={600}
+        width={imageSize.width}
+        height={imageSize.height}
         quality={100}
-        alt={mangaName + "- Page " + chapter.page + "Galsens Mangas Senegal"}
-        className="object-contain aspect-auto w-full h-full"
+        priority
+        alt={`${mangaName} - Page ${chapter.page} Galsens Mangas Senegal`}
+        className="object-contain w-full h-auto"
+        onLoadingComplete={({ naturalWidth, naturalHeight }) =>
+          setImageSize({ width: naturalWidth, height: naturalHeight })
+        }
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 70vw"
       />
     </figure>
   );
