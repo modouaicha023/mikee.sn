@@ -58,11 +58,13 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
               <span className="badge badge-secondary">{manga.status}</span>
             )}
             {manga.year && (
-              <span className="badge badge-info">{manga.year}</span>
+              <span className="badge badge-info">Year : {manga.year}</span>
             )}
           </div>
           <div className="flex flex-wrap gap-x-4 gap-y-2 justify-center md:justify-start items-center h-fit">
-            <h2 className="h-fit m-0">Genre : </h2>
+            {manga.genres && manga.genres?.length > 0 && (
+              <h2 className="h-fit m-0">Genre : </h2>
+            )}
             {manga.genres?.map((genre) => (
               <span className="badge badge-outline" key={genre}>
                 {genre}
@@ -73,27 +75,25 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
             {manga.description}
           </p>
           <div className="flex gap-4 justify-center items-center">
-            {manga.chapters && (
+            {manga.chapters && manga.chapters.length > 0 && (
               <Link
                 href={`/mangas/${manga.slug}/chapter/${
                   manga.chapters[manga.chapters.length - 1].id
                 }`}
+                className="no-underline"
               >
                 <button className="btn btn-primary">
-                  Chapter{" "}
-                  {
-                    manga.chapters[manga.chapters.length - 1]
-                      ?.chapterNumber as any
-                  }
+                  <span>First chapter</span>
                 </button>
               </Link>
             )}
             {manga.chapters && (
               <Link
                 href={`/mangas/${manga.slug}/chapter/${manga.chapters[0].id}`}
+                className="no-underline"
               >
                 <button className="btn btn-primary">
-                  Chapter {manga.chapters[0].chapterNumber as any}
+                  <span>Last chapter</span>
                 </button>
               </Link>
             )}
@@ -108,7 +108,7 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
             <li key={chapter.id}>
               <Link
                 href={`/mangas/${manga.slug}/chapter/${chapter.id}`}
-                className="flex gap-2 "
+                className="no-underline"
               >
                 <button className="btn btn-primary">
                   {chapter.chapterNumber !== undefined && (

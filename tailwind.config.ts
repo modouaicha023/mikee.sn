@@ -15,6 +15,7 @@ const config: Config = {
         "screen580": "580px",
         "screen500": "500px",
         "screen430": "430px",
+        "screen380": "380px",
         "screen300": "300px"
       },
     },

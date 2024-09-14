@@ -10,7 +10,7 @@ interface UserProps {
 
 export const User: React.FC<UserProps> = ({ user }) => {
   return (
-    <div className="avatar items-center w-fit h-fit hidden screen500:inline-flex">
+    <div className="avatar items-center w-fit h-fit  screen500:inline-flex">
       <div className="ring-primary ring-offset-base-100 w-12 rounded-full ring ring-offset-0">
         <Image
           src={user.avatar}

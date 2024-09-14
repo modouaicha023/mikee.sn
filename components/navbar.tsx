@@ -21,7 +21,7 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
           <Link href={"/"}>
             <Image
               src={babyDragon}
-              alt="Baby Dragon"
+              alt="Baby Dragon - Logo Galsen Mangas"
               width={48}
               height={48}
               className="w-12 h-12 object-cover"
@@ -29,26 +29,26 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
           </Link>
         </div>
         <ul className="navbar-center gap-x-2">
-          <li>
+          {/* <li>
             <ButtonImage title="Popular" iconPosition="right" svg={fire()} />
-          </li>
+          </li> */}
           <li>
             <SearchInput />
           </li>
-          <li>
+          {/* <li>
             <ButtonImage
               title="New"
               iconPosition="right"
               svg={GreenDragonIcon()}
             />
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <ButtonImage
               title="Genre"
               iconPosition="right"
               svg={CatalogueIcon()}
             />
-          </li>
+          </li> */}
         </ul>
         <div className="navbar-end gap-x-2 w-fit">
           <ThemeSwitcher />
