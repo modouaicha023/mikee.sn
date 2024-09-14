@@ -10,7 +10,6 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
 
   try {
     const data: IMangaInfo = await mangadex.fetchMangaInfo(params.slug);
-    console.log(data);
     manga = {
       coverImage: data.image || "",
       name: data.title as any,
@@ -38,8 +37,8 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
   }
 
   return (
-    <article className=" flex flex-col gap-4 items-center w-full justify-center p-4">
-      <div className="flex justify-center items-center max-w-none w-full p-4 gap-2 flex-col md:flex-row h-fit">
+    <article className=" overflow-hidden flex flex-col gap-4 items-center w-full justify-center p-4">
+      <div className="flex justify-center items-start max-w-none w-full p-4 gap-2 flex-col md:flex-row h-fit">
         <figure className="flex relative h-[300px] md:h-[500px] md:w-[300px] w-full">
           <Image
             src={manga.coverImage}
@@ -62,7 +61,7 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
               <span className="badge badge-info">{manga.year}</span>
             )}
           </div>
-          <div className="flex gap-x-4 justify-center md:justify-start items-center h-fit">
+          <div className="flex flex-wrap gap-x-4 gap-y-2 justify-center md:justify-start items-center h-fit">
             <h2 className="h-fit m-0">Genre : </h2>
             {manga.genres?.map((genre) => (
               <span className="badge badge-outline" key={genre}>
@@ -70,7 +69,7 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
               </span>
             ))}
           </div>
-          <p className=" w-full break-all md:max-w-md md:text-justify text-balance text-sm md:text-lg p-4 m-0">
+          <p className=" w-full break-all md:max-w-md md:text-justify text-balance text-sm md:text-lg p-4 m-0 max-h-[200px] overflow-auto">
             {manga.description}
           </p>
           <div className="flex gap-4 justify-center items-center">
@@ -101,10 +100,10 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
           </div>
         </div>
       </div>
-      <ul className="flex flex-wrap w-full  items-center gap-2 overflow-auto max-w-3xl">
+      <ul className="flex flex-wrap w-full  items-center gap-2 overflow-auto max-w-3xl max-h-[400px] screen300:justify-center">
         {manga.chapters
-          ?.slice() // Crée une copie du tableau pour ne pas muter l'original
-          .reverse() // Inverse l'ordre des éléments
+          ?.slice()
+          .reverse()
           .map((chapter) => (
             <li key={chapter.id}>
               <Link
