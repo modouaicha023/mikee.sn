@@ -50,7 +50,7 @@ export default function SearchPage() {
     <>
       <section className="flex flex-wrap gap-2 px-6 py-2 justify-center sm:justify-normal h-fit mx-auto">
         {results.length === 0 ? (
-          <p>No results found for "{query}"</p>
+          <p>No results found for &quot;{query}&quot;</p>
         ) : (
           results.map((manga) => <MangaCard key={manga.slug} manga={manga} />)
         )}
@@ -59,7 +59,7 @@ export default function SearchPage() {
       <aside className="border-l-2 border-base-content w-1/5 min-w-[300px] max-w-[400px] hidden sm:flex">
         <div className="p-4">
           <h2 className="text-xl font-bold mb-4">Search Results</h2>
-          <p>Showing results for: "{query}"</p>
+          <p>Showing results for: &quot;{query}&quot;</p>
           <p>Total results: {results.length}</p>
         </div>
       </aside>
