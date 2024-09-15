@@ -81,7 +81,7 @@ export default function CreditPage() {
     >
       <h1>Credits</h1>
       <p>
-        This project wouldn't have been possible without the help of various
+        This project wouldn&apos;t have been possible without the help of various
         open-source libraries, tools, and resources. We would like to
         acknowledge and give credit to the following:
       </p>
