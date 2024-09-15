@@ -8,7 +8,7 @@ const nextConfig = {
         removeConsole: process.env.NODE_ENV !== "development"
     },
     images: {
-        unoptimized: false,
+        unoptimized: true,
         remotePatterns: [
             {
                 protocol: 'https',
