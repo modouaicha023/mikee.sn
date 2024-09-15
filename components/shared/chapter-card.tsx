@@ -24,6 +24,7 @@ export const ChapterCard: React.FC<ChapterCardProps> = ({
       <div style={{ paddingTop: `${100 / aspectRatio}%` }} className="relative">
         <Image
           src={chapter?.img}
+          unoptimized
           fill
           quality={100}
           priority
