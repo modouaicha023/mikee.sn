@@ -4,7 +4,7 @@ import React from "react";
 export default function Footer() {
   return (
     <footer className="footer footer-center bg-base-200 text-base-content rounded p-10 border-t-2 border-base-content">
-      <nav className="grid grid-flow-col gap-4">
+      <nav className="grid grid-flow-row screen380:grid-flow-col gap-4 ">
         <Link href={"/"} className="link link-hover">
           Home
         </Link>
@@ -58,11 +58,11 @@ export default function Footer() {
           </Link>
         </div>
       </nav> */}
-      <aside>
+      {/* <aside>
         <p>
           Copyright © {new Date().getFullYear()} - All right reserved by Galsen Mangas
         </p>
-      </aside>
+      </aside> */}
     </footer>
   );
 }
