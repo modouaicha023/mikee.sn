@@ -9,6 +9,7 @@ import GoogleAnalytics from "@/components/google-analytics";
 import Link from "next/link";
 import Image from "next/image";
 import swordTop from "@/public/images/sword.png";
+import Footer from "@/components/footer";
 const inter = Coming_Soon({
   weight: "400",
   subsets: ["latin"],
@@ -64,6 +65,7 @@ export default function RootLayout({
               />
             </Link>
           </main>
+          <Footer />
         </ThemeProvider>
         <Analytics />
       </body>
