@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dropdown-content {
+  position: absolute;
+  right: 0;
+  left: auto;
+}
