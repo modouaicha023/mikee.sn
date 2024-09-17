@@ -16,7 +16,7 @@ export async function GET(
       chapters = data.chapters.map((chapter) => ({
         slug: chapter.id,
         title: chapter.title,
-        releaseDate: chapter.releaseDate || "Unknown",
+        releaseDate: chapter.releaseDate || "unknown",
       }));
     }
 
@@ -31,7 +31,7 @@ export async function GET(
       coverImage: data.image || "/public/images/solo-leveling.jpeg",
       lastChapter: (data.lastChapter as string) || null,
       status: data.status as unknown as MangaStatus,
-      year: (data.releaseDate as string) || "Unknown",
+      year: (data.releaseDate as string) || "unknown",
       description:
         typeof data.description === "string"
           ? data.description

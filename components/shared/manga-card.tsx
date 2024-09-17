@@ -39,7 +39,7 @@ export const MangaCard: React.FC<MangaCardProps> = ({ manga }) => {
           {manga.name}
         </h2>
         <div className="flex flex-wrap gap-1 justify-evenly">
-          {manga.status && (
+          {manga.status && manga.status !== "unknown" && (
             <div className={`badge  ${statusColor}`}>{manga.status}</div>
           )}
           {manga.lastChapter && (

@@ -5,12 +5,11 @@ import { Manga, MangaStatus } from "@/@types";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const page = Number(searchParams.get("page")) || 1;
-  const query = searchParams.get("query") || "cultivation";
+  const query = searchParams.get("query") || "martial";
 
   const mangaProvider = new MANGA.Mangasee123();
   try {
-    const data = await mangaProvider.search(query, page);
-    console.log(data);
+    const data = await mangaProvider.search(query, page, 10);
     const mangas: Manga[] =
       data?.results?.map((manga: any) => ({
         slug: manga.id,

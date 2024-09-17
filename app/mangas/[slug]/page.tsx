@@ -104,7 +104,7 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
                 <tr key={chapter.slug}>
                   <td>{index + 1}</td>
                   <td>{chapter.title || `Chapter ${index + 1}`}</td>
-                  <td>{chapter.releaseDate || "Unknown"}</td>
+                  <td>{chapter.releaseDate || "unknown"}</td>
                   <td>
                     <Link
                       href={`/mangas/${manga.slug}/chapter/${chapter.slug}`}
