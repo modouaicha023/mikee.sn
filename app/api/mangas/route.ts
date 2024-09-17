@@ -12,7 +12,7 @@ export async function GET(request: Request) {
     const data = await mangaProvider.search(query, page, 10);
     const mangas: Manga[] =
       data?.results?.map((manga: any) => ({
-        slug: manga.id,
+        mangaSlug: manga.id,
         name: manga.title,
         coverImage: manga.image,
         lastChapter: "",

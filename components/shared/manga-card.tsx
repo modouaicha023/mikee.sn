@@ -21,7 +21,7 @@ export const MangaCard: React.FC<MangaCardProps> = ({ manga }) => {
   }
   return (
     <Link
-      href={`/mangas/${manga.slug}`}
+      href={`/mangas/${manga.mangaSlug}`}
       className="flex flex-col border-2 border-base-content bg-base-100 w-[250px] h-[300px] sm:w-[300px] sm:h-[350px]"
     >
       <figure className="h-60 relative flex-grow">

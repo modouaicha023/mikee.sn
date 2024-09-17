@@ -2,33 +2,49 @@ import { notFound } from "next/navigation";
 import { IMangaChapterPage, MANGA } from "@consumet/extensions";
 import { ChapterCard } from "@/components/shared/chapter-card";
 import Link from "next/link";
+import { Manga } from "@/@types";
 
 const ChapterPage = async ({
   params,
 }: {
-  params: { slug: string; chapter: string };
+  params: { mangaSlug: string; chapterSlug: string };
 }) => {
-  const mangadex = new MANGA.MangaDex();
-  const mangaInfo = await mangadex.fetchMangaInfo(params.slug);
-  const mangaName = mangaInfo.title;
-  let chapterImages: IMangaChapterPage[] = [];
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-  const chapterIndex = mangaInfo.chapters?.findIndex(
-    (chapter) => chapter.id === params.chapter
+  const response = await fetch(`${baseUrl}/api/mangas/${params.mangaSlug}`);
+
+  if (!response.ok) {
+    notFound();
+  }
+  const data = await response.json();
+
+  const manga: Manga = data.manga;
+  const mangaName = manga.name;
+  let chapterImages: { img: string; page: number }[] = [];
+
+  const chapterIndex = manga.chapters?.findIndex(
+    (chapter) => chapter.chapterSlug === params.chapterSlug
   );
-  // If the chapter is not found, return a 404 page
+
   if (chapterIndex === undefined || chapterIndex === -1) {
     notFound();
   }
 
-  const currentChapter = mangaInfo.chapters?.[chapterIndex];
-  const nextChapter = mangaInfo.chapters?.[chapterIndex - 1];
-  const prevChapter = mangaInfo.chapters?.[chapterIndex + 1];
+  const currentChapter = manga.chapters?.[chapterIndex];
+  const nextChapter = manga.chapters?.[chapterIndex - 1];
+  const prevChapter = manga.chapters?.[chapterIndex + 1];
 
   try {
-    chapterImages = await mangadex.fetchChapterPages(params.chapter);
+    const response = await fetch(
+      `${baseUrl}/api/mangas/${params.mangaSlug}/chapters/${params.chapterSlug}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch chapter images");
+    }
+    const data = await response.json();
+    chapterImages = data.chapterImages;
   } catch (error) {
-    console.error("Error fetching manga data:", error);
+    console.error("Error fetching chapter images:", error);
     notFound();
   }
 
@@ -44,19 +60,19 @@ const ChapterPage = async ({
           </li>
           <li>
             <Link
-              href={`/mangas/${params.slug}`}
+              href={`/mangas/${params.mangaSlug}`}
               className="underline text-primary"
             >
               {(mangaName as string).substring(0, 10)}
             </Link>
           </li>
-          <li>Chapter {currentChapter?.chapterNumber as string}</li>
+          <li>Chapter {currentChapter?.chapterSlug as string}</li>
         </ul>
       </div>
       <div className="join grid grid-cols-2 mb-4  place-items-center">
         {prevChapter ? (
           <Link
-            href={`/mangas/${params.slug}/chapter/${prevChapter.id}`}
+            href={`/mangas/${params.mangaSlug}/chapters/${prevChapter.chapterSlug}`}
             className="w-full"
           >
             <button className="join-item btn btn-outline">
@@ -70,10 +86,12 @@ const ChapterPage = async ({
         )}
         {nextChapter ? (
           <Link
-            href={`/mangas/${params.slug}/chapter/${nextChapter.id}`}
+            href={`/mangas/${params.mangaSlug}/chapter/${nextChapter.chapterSlug}`}
             className="w-full"
           >
-            <button className="join-item btn btn-outline w-full">Next chapter</button>
+            <button className="join-item btn btn-outline w-full">
+              Next chapter
+            </button>
           </Link>
         ) : (
           <button className="join-item btn w-full btn-outline" disabled>
@@ -81,7 +99,7 @@ const ChapterPage = async ({
           </button>
         )}
       </div>
-      {chapterImages.map((chapterImage: { img: string; page: number }) => (
+      {chapterImages.map((chapterImage: { img: string; page: number }, index) => (
         <ChapterCard
           key={chapterImage.page}
           chapter={chapterImage}
@@ -91,7 +109,7 @@ const ChapterPage = async ({
       <div className="join grid grid-cols-2 mt-4 w-full">
         {prevChapter ? (
           <Link
-            href={`/mangas/${params.slug}/chapter/${prevChapter.id}`}
+            href={`/mangas/${params.mangaSlug}/chapter/${prevChapter.chapterSlug}`}
             className="w-full"
           >
             <button className="join-item btn w-full btn-outline">
@@ -105,7 +123,7 @@ const ChapterPage = async ({
         )}
         {nextChapter ? (
           <Link
-            href={`/mangas/${params.slug}/chapter/${nextChapter.id}`}
+            href={`/mangas/${params.mangaSlug}/chapter/${nextChapter.chapterSlug}`}
             className="w-full"
           >
             <button className="join-item btn w-full btn-outline">

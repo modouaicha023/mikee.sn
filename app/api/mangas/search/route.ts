@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
-import { MANGA } from "@consumet/extensions";
+import { Genres, MANGA } from "@consumet/extensions";
+import { Manga, MangaStatus } from "@/@types";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
+  const page = Number(searchParams.get("page")) || 1;
   const query = searchParams.get("q");
 
   if (!query) {
@@ -12,21 +14,23 @@ export async function GET(request: Request) {
     );
   }
 
-  const manga = new MANGA.MangaDex();
+  const mangaProvider = new MANGA.Mangasee123();
   try {
-    const data = await manga.search(query);
-    const results =
+    const data = await mangaProvider.search(query, page, 10);
+    const mangas: Manga[] =
       data?.results?.map((manga: any) => ({
-        coverImage: manga.image,
+        mangaSlug: manga.id,
         name: manga.title,
-        lastChapter: manga.lastChapter,
-        status: manga.status,
-        slug: manga.id,
-        year: manga.releaseDate,
+        coverImage: manga.image,
+        lastChapter: "",
+        status: MangaStatus.UNKNOWN,
+        year: "",
         description: "",
+        genres: [],
+        chapters: [],
       })) || [];
 
-    return NextResponse.json({ results });
+    return NextResponse.json({ mangas });
   } catch (error) {
     console.error("Error fetching manga data:", error);
     return NextResponse.json(

@@ -4,23 +4,25 @@ import { Chapter, Manga, MangaStatus } from "@/@types";
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { mangaSlug: string; chapterSlug: string } }
 ) {
   const mangaProvider = new MANGA.Mangasee123();
   try {
     let chapters: Chapter[] = [];
-    const data: IMangaInfo = await mangaProvider.fetchMangaInfo(params.slug);
+    const data: IMangaInfo = await mangaProvider.fetchMangaInfo(
+      params.mangaSlug
+    );
 
     if (data.chapters !== undefined) {
       chapters = data.chapters.map((chapter) => ({
-        slug: chapter.id,
+        chapterSlug: chapter.id,
         title: chapter.title,
         releaseDate: chapter.releaseDate || "unknown",
       }));
     }
 
     const manga: Manga = {
-      slug: data.id,
+      mangaSlug: data.id,
       name:
         typeof data.title === "string"
           ? data.title

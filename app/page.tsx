@@ -49,7 +49,7 @@ export default function HomePage() {
       <div className="flex flex-col gap-y-4 items-center justify-center py-2">
         <section className="flex flex-wrap gap-2 px-6 py-2 justify-center sm:justify-normal h-fit mx-auto">
           {mangas.map((manga) => (
-            <MangaCard key={manga.slug} manga={manga} />
+            <MangaCard key={manga.mangaSlug} manga={manga} />
           ))}
         </section>
         <div className="join">

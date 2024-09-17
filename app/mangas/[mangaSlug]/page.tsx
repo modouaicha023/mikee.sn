@@ -3,12 +3,10 @@ import Image from "next/image";
 import { Manga } from "@/@types";
 import Link from "next/link";
 
-const MangaPage = async ({ params }: { params: { slug: string } }) => {
+const MangaPage = async ({ params }: { params: { mangaSlug: string } }) => {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-  const response = await fetch(`${baseUrl}/api/mangas/${params.slug}`, {
-    cache: "no-store",
-  });
+  const response = await fetch(`${baseUrl}/api/mangas/${params.mangaSlug}`);
 
   if (!response.ok) {
     notFound();
@@ -62,8 +60,8 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
           <div className="flex gap-4 justify-center items-center">
             {manga.chapters?.length > 0 && (
               <Link
-                href={`/mangas/${manga.slug}/chapter/${
-                  manga.chapters[manga.chapters.length - 1]?.slug
+                href={`/mangas/${manga.mangaSlug}/chapter/${
+                  manga.chapters[manga.chapters.length - 1]?.chapterSlug
                 }`}
                 className="no-underline"
               >
@@ -74,7 +72,7 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
             )}
             {manga.chapters && (
               <Link
-                href={`/mangas/${manga.slug}/chapter/${manga.chapters[0]?.slug}`}
+                href={`/mangas/${manga.mangaSlug}/chapter/${manga.chapters[0]?.chapterSlug}`}
                 className="no-underline"
               >
                 <button className="btn btn-primary">
@@ -101,13 +99,13 @@ const MangaPage = async ({ params }: { params: { slug: string } }) => {
               ?.slice()
               .reverse()
               .map((chapter, index) => (
-                <tr key={chapter.slug}>
+                <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{chapter.title || `Chapter ${index + 1}`}</td>
                   <td>{chapter.releaseDate || "unknown"}</td>
                   <td>
                     <Link
-                      href={`/mangas/${manga.slug}/chapter/${chapter.slug}`}
+                      href={`/mangas/${manga.mangaSlug}/chapter/${chapter.chapterSlug}`}
                       className="underline"
                     >
                       Read

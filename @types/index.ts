@@ -10,7 +10,7 @@ export enum MangaStatus {
   UNKNOWN = "unknown",
 }
 export interface Manga {
-  slug: string;
+  mangaSlug: string;
   name: string;
   description: string;
   coverImage: string;
@@ -22,7 +22,7 @@ export interface Manga {
 }
 
 export interface Chapter {
-  slug: string;
+  chapterSlug: string;
   title: string;
   releaseDate: string;
 }
