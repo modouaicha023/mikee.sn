@@ -39,6 +39,24 @@ const nextConfig = {
                 port: '',
                 pathname: '/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'compsci88.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: '**.compsci88.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'temp.compsci88.com',
+                port: '',
+                pathname: '/**',
+            },
         ],
     }
 };

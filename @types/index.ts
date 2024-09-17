@@ -7,15 +7,22 @@ export enum MangaStatus {
   COMPLETED = "completed	",
   PAUSED = "paused",
   CANCELLED = "cancelled",
+  UNKNOWN = "unknown",
 }
 export interface Manga {
   slug: string;
-  coverImage: StaticImageData | string;
   name: string;
-  lastChapter?: string;
-  chapters?: IMangaChapter[] | undefined;
-  status: MangaStatus;
   description: string;
-  year: string;
+  coverImage: string;
+  status: MangaStatus;
   genres?: string[];
+  chapters: Chapter[];
+  lastChapter: string | null;
+  year: string;
+}
+
+export interface Chapter {
+  slug: string;
+  title: string;
+  releaseDate: string;
 }
