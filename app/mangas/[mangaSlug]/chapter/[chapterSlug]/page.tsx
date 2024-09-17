@@ -9,7 +9,7 @@ const ChapterPage = async ({
 }: {
   params: { mangaSlug: string; chapterSlug: string };
 }) => {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
   const response = await fetch(`${baseUrl}/api/mangas/${params.mangaSlug}`);
 

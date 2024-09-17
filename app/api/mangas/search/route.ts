@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Genres, MANGA } from "@consumet/extensions";
+import { MANGA } from "@consumet/extensions";
 import { Manga, MangaStatus } from "@/@types";
 
 export async function GET(request: Request) {
@@ -16,7 +16,7 @@ export async function GET(request: Request) {
 
   const mangaProvider = new MANGA.Mangasee123();
   try {
-    const data = await mangaProvider.search(query, page, 10);
+    const data = await mangaProvider.search(query);
     const mangas: Manga[] =
       data?.results?.map((manga: any) => ({
         mangaSlug: manga.id,
