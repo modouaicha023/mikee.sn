@@ -21,16 +21,12 @@ export const MangaCard: React.FC<MangaCardProps> = ({ manga }) => {
   }
   return (
     <Link
-      href={"/mangas/" + manga.slug}
+      href={`/mangas/${manga.mangaSlug}`}
       className="flex flex-col border-2 border-base-content bg-base-100 w-[250px] h-[300px] sm:w-[300px] sm:h-[350px]"
     >
       <figure className="h-60 relative flex-grow">
         <Image
-          src={
-            typeof manga.coverImage === "object"
-              ? manga.coverImage.src
-              : manga.coverImage
-          }
+          src={manga.coverImage}
           alt={manga.name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -39,9 +35,11 @@ export const MangaCard: React.FC<MangaCardProps> = ({ manga }) => {
         />
       </figure>
       <div className="flex flex-col p-4">
-        <h2 className="text-center text-ellipsis sm:line-clamp-1">{manga.name}</h2>
+        <h2 className="text-center text-ellipsis sm:line-clamp-1">
+          {manga.name}
+        </h2>
         <div className="flex flex-wrap gap-1 justify-evenly">
-          {manga.status && (
+          {manga.status && manga.status !== "unknown" && (
             <div className={`badge  ${statusColor}`}>{manga.status}</div>
           )}
           {manga.lastChapter && (
@@ -49,7 +47,7 @@ export const MangaCard: React.FC<MangaCardProps> = ({ manga }) => {
               {manga?.lastChapter}
             </div>
           )}
-          {manga.year && (
+          {manga.year && manga.year !== "unknown" && (
             <div className="badge badge-outline">{manga.year}</div>
           )}
         </div>

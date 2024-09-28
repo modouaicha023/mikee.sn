@@ -8,6 +8,7 @@ const nextConfig = {
         removeConsole: process.env.NODE_ENV !== "development"
     },
     images: {
+        unoptimized: true,
         remotePatterns: [
             {
                 protocol: 'https',
@@ -41,6 +42,12 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
+                hostname: 'compsci88.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
                 hostname: '**.compsci88.com',
                 port: '',
                 pathname: '/**',
@@ -53,25 +60,19 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
-                hostname: 'mangahere.com',
+                hostname: 'lowee.us',
                 port: '',
                 pathname: '/**',
             },
             {
                 protocol: 'https',
-                hostname: 'fmcdn.mangahere.com',
-                port: '',
-                pathname: '/**',
-            },
-            {
-                protocol: 'http',
-                hostname: 'fmcdn.mangahere.com',
+                hostname: '**.lowee.us',
                 port: '',
                 pathname: '/**',
             },
             {
                 protocol: 'https',
-                hostname: 'api.consumet.org',
+                hostname: 'official.lowee.us',
                 port: '',
                 pathname: '/**',
             },

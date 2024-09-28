@@ -1,22 +1,26 @@
 import { NextResponse } from "next/server";
 import { MANGA } from "@consumet/extensions";
+import { Manga, MangaStatus } from "@/@types";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const page = Number(searchParams.get("page")) || 1;
+  const query = searchParams.get("query") || "martial";
 
-  const mangaProvider = new MANGA.MangaDex();
+  const mangaProvider = new MANGA.Mangasee123();
   try {
-    const data = await mangaProvider.fetchPopular(page);
-    const mangas =
+    const data = await mangaProvider.search(query);
+    const mangas: Manga[] =
       data?.results?.map((manga: any) => ({
-        coverImage: manga.image,
+        mangaSlug: manga.id,
         name: manga.title,
-        lastChapter: manga.lastChapter,
-        status: manga.status,
-        slug: manga.id,
-        year: manga.releaseDate,
+        coverImage: manga.image,
+        lastChapter: "",
+        status: MangaStatus.UNKNOWN,
+        year: "",
         description: "",
+        genres: [],
+        chapters: [],
       })) || [];
 
     return NextResponse.json({ mangas });

@@ -14,7 +14,7 @@ export default function HomePage() {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`/api/mangas?page=${mangaPage}`);
+        const response = await fetch(`/api/mangas?query=murim`);
         if (!response.ok) {
           throw new Error("Failed to fetch manga data");
         }
@@ -49,10 +49,10 @@ export default function HomePage() {
       <div className="flex flex-col gap-y-4 items-center justify-center py-2">
         <section className="flex flex-wrap gap-2 px-6 py-2 justify-center sm:justify-normal h-fit mx-auto">
           {mangas.map((manga) => (
-            <MangaCard key={manga.slug} manga={manga} />
+            <MangaCard key={manga.mangaSlug} manga={manga} />
           ))}
         </section>
-        <div className="join">
+        {/* <div className="join">
           <button
             className="join-item btn"
             onClick={() => setMangaPage((prev) => Math.max(1, prev - 1))}
@@ -67,7 +67,7 @@ export default function HomePage() {
           >
             »
           </button>
-        </div>
+        </div> */}
       </div>
 
       <aside className="border-l-2 border-base-content w-1/5 min-w-[300px] max-w-[400px] hidden sm:flex">
