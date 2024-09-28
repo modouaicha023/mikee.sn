@@ -71,7 +71,7 @@ export default function HomePage() {
       </div>
 
       <aside className="border-l-2 border-base-content w-1/5 min-w-[300px] max-w-[400px] hidden sm:flex">
-        aside
+        
       </aside>
     </>
   );

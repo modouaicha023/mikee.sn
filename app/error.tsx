@@ -10,19 +10,13 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
     console.error(error);
   }, [error]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen gap-3 overflow-hidden">
       <h2>Something went wrong!</h2>
-      <button className="btn btn-primary"
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
+      <button className="btn btn-primary" onClick={() => reset()}>
         Try again
       </button>
     </div>
