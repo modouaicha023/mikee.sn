@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   const page = Number(searchParams.get("page")) || 1;
   const query = searchParams.get("query") || "martial";
 
-  const mangaProvider = new MANGA.Mangasee123();
+  const mangaProvider = new MANGA.MangaDex();
   try {
     const data = await mangaProvider.search(query);
     const mangas: Manga[] =

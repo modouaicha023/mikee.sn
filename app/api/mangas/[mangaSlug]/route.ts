@@ -6,7 +6,7 @@ export async function GET(
   request: Request,
   { params }: { params: { mangaSlug: string; chapterSlug: string } }
 ) {
-  const mangaProvider = new MANGA.Mangasee123();
+  const mangaProvider = new MANGA.MangaDex();
   try {
     let chapters: Chapter[] = [];
     const data: IMangaInfo = await mangaProvider.fetchMangaInfo(
