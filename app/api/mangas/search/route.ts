@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     );
   }
 
-  const mangaProvider = new MANGA.Mangasee123();
+  const mangaProvider = new MANGA.MangaDex();
   try {
     const data = await mangaProvider.search(query);
     const mangas: Manga[] =

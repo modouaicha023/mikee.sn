@@ -5,9 +5,11 @@ export async function GET(
   request: Request,
   { params }: { params: { mangaSlug: string; chapterSlug: string } }
 ) {
-  const mangaProvider = new MANGA.Mangasee123();
+  const mangaProvider = new MANGA.MangaDex();
   try {
-    const chapterImages = await mangaProvider.fetchChapterPages(params.chapterSlug);
+    const chapterImages = await mangaProvider.fetchChapterPages(
+      params.chapterSlug
+    );
     return NextResponse.json({ chapterImages });
   } catch (error) {
     console.error("Error fetching chapter images:", error);
