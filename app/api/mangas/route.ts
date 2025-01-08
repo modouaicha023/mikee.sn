@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { MANGA } from "@consumet/extensions";
-import { Manga, MangaStatus } from "@/@types";
+import { Manga, MangaStatus } from "@/types";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

@@ -12,7 +12,9 @@ export default function NotFound() {
         backgroundPosition: "right",
       }}
     >
-      <h1 className="font-bold text-lg text-center m-10">{"Page not found 👈(ﾟヮﾟ👈)"}</h1>
+      <h1 className="font-bold text-lg text-center m-10">
+        {"Page not found 👈(ﾟヮﾟ👈)"}
+      </h1>
       <Link href="/" className="btn w-fit">
         Back to home
       </Link>

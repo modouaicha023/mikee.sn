@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MangaCard } from "@/components/shared/manga-card";
-import { Manga } from "@/@types";
+import { Manga } from "@/types";
 
 export default function SearchPage() {
   const searchParams = useSearchParams();

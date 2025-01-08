@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { IMangaInfo, MANGA } from "@consumet/extensions";
-import { Chapter, Manga, MangaStatus } from "@/@types";
+import { Chapter, Manga, MangaStatus } from "@/types";
 
 export async function GET(
   request: Request,

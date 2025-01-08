@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/components/shared/layout/navbar";
 interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = ({}) => {
