@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { IMangaChapterPage, MANGA } from "@consumet/extensions";
 import { ChapterCard } from "@/components/shared/chapter-card";
 import Link from "next/link";
-import { Manga } from "@/@types";
+import { Manga } from "@/types";
 
 const ChapterPage = async ({
   params,
@@ -99,13 +99,15 @@ const ChapterPage = async ({
           </button>
         )}
       </div>
-      {chapterImages.map((chapterImage: { img: string; page: number }, index) => (
-        <ChapterCard
-          key={chapterImage.page}
-          chapter={chapterImage}
-          mangaName={mangaName as string}
-        />
-      ))}
+      {chapterImages.map(
+        (chapterImage: { img: string; page: number }, index) => (
+          <ChapterCard
+            key={chapterImage.page}
+            chapter={chapterImage}
+            mangaName={mangaName as string}
+          />
+        )
+      )}
       <div className="join grid grid-cols-2 mt-4 w-full">
         {prevChapter ? (
           <Link

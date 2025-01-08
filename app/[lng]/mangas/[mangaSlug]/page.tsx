@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { Manga } from "@/@types";
+import { Manga } from "@/types";
 import Link from "next/link";
 
 const MangaPage = async ({ params }: { params: { mangaSlug: string } }) => {

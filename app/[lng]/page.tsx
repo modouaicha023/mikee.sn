@@ -1,5 +1,5 @@
 "use client";
-import { Manga } from "@/@types";
+import { Manga } from "@/types";
 import { MangaCard } from "@/components/shared/manga-card";
 import { useEffect, useState } from "react";
 
@@ -70,9 +70,7 @@ export default function HomePage() {
         </div> */}
       </div>
 
-      <aside className="border-l-2 border-base-content w-1/5 min-w-[300px] max-w-[400px] hidden sm:flex">
-        
-      </aside>
+      <aside className="border-l-2 border-base-content w-1/5 min-w-[300px] max-w-[400px] hidden sm:flex"></aside>
     </>
   );
 }

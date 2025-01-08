@@ -7,9 +7,9 @@ import { User } from "@/components/shared/user";
 import babyDragon from "@/public/images/baby-dragon.png";
 import dragon from "@/public/images/dragon-head.png";
 import Link from "next/link";
-import fire from "@/components/svg/fire";
-import GreenDragonIcon from "./svg/green-dragon";
-import CatalogueIcon from "./svg/catalogue";
+import fire from "@/components/icons/fire";
+import GreenDragonIcon from "../../icons/green-dragon";
+import CatalogueIcon from "../../icons/catalogue";
 interface NavbarProps {}
 
 export const Navbar: React.FC<NavbarProps> = ({}) => {
