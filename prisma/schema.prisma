@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// Prisma schema file for Galsen Mangas platform
 
 generator client {
   provider = "prisma-client-js"
@@ -11,4 +7,115 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(cuid())
+  username  String     @unique
+  email     String     @unique
+  password  String
+  avatar    String?
+  favorites Favorite[]
+  history   History[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Manga {
+  id          String      @id @default(cuid())
+  title       String
+  description String
+  coverImage  String
+  author      String
+  genres      Genre[]     @relation("MangaGenres")
+  chapters    Int
+  status      MangaStatus
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  favorites   Favorite[]
+  history     History[]
+}
+
+model Anime {
+  id          String      @id @default(cuid())
+  title       String
+  description String
+  coverImage  String
+  studio      String
+  genres      Genre[]     @relation("AnimeGenres")
+  episodes    Int
+  status      AnimeStatus
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  favorites   Favorite[]
+  history     History[]
+}
+
+model Novel {
+  id          String      @id @default(cuid())
+  title       String
+  description String
+  coverImage  String
+  author      String
+  genres      Genre[]     @relation("NovelGenres")
+  chapters    Int
+  status      NovelStatus
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  favorites   Favorite[]
+  history     History[]
+}
+
+model Genre {
+  id     String  @id @default(cuid())
+  name   String  @unique
+  mangas Manga[] @relation("MangaGenres")
+  animes Anime[] @relation("AnimeGenres")
+  novels Novel[] @relation("NovelGenres")
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  mangaId   String?
+  manga     Manga?   @relation(fields: [mangaId], references: [id])
+  animeId   String?
+  anime     Anime?   @relation(fields: [animeId], references: [id])
+  novelId   String?
+  novel     Novel?   @relation(fields: [novelId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model History {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  mangaId   String?
+  manga     Manga?   @relation(fields: [mangaId], references: [id])
+  animeId   String?
+  anime     Anime?   @relation(fields: [animeId], references: [id])
+  novelId   String?
+  novel     Novel?   @relation(fields: [novelId], references: [id])
+  progress  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum MangaStatus {
+  ONGOING
+  COMPLETED
+  PAUSED
+}
+
+enum AnimeStatus {
+  ONGOING
+  COMPLETED
+  PAUSED
+}
+
+enum NovelStatus {
+  ONGOING
+  COMPLETED
+  PAUSED
 }
